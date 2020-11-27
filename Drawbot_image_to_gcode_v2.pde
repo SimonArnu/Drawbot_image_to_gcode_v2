@@ -22,18 +22,19 @@ final float   image_size_x = 28 * 25.4;
 final float   image_size_y = 36 * 25.4;
 final float   paper_top_to_origin = 285;      //mm, make smaller to move drawing down on paper
 final float   pen_width = 0.65;               //mm, determines image_scale, reduce, if solid black areas are speckled with white holes.
-final int     pen_count = 6;
+final int     pen_count = 1;
 final char    gcode_decimal_seperator = '.';    
 final int     gcode_decimals = 2;             // Number of digits right of the decimal point in the gcode files.
 final int     svg_decimals = 2;               // Number of digits right of the decimal point in the SVG file.
 final float   grid_scale = 25.4;              // Use 10.0 for centimeters, 25.4 for inches, and between 444 and 529.2 for cubits.
-
+final String  pic_path = "pics/IMG_4704.png";
 
 // Every good program should have a shit pile of badly named globals.
 Class cl = null;
 pfm ocl;
 int current_pfm = 0;
-String[] pfms = {"PFM_original", "PFM_spiral", "PFM_squares"}; 
+//String[] pfms = {"PFM_original", "PFM_spiral", "PFM_squares"}; 
+String[] pfms = {"PFM_original"}; 
 
 int     state = 1;
 int     pen_selected = 0;
@@ -112,15 +113,16 @@ void setup() {
   loadInClass(pfms[current_pfm]);
 
   // If the clipboard contains a URL, try to download the picture instead of using local storage.
-  String url = GClip.paste();
-  if (match(url.toLowerCase(), "^https?:...*(jpg|png)") != null) {
-    println("Image URL found on clipboard: "+ url);
-    path_selected = url;
-    state++;
-  } else {
-    println("image URL not found on clipboard");
-    selectInput("Select an image to process:", "fileSelected");
-  }
+  //String url = GClip.paste();
+  //if (match(url.toLowerCase(), "^https?:...*(jpg|png)") != null) {
+  //  println("Image URL found on clipboard: "+ url);
+  //  path_selected = url;
+  //  state++;
+  //} else {
+  //  println("image URL not found on clipboard");
+  //  selectInput("Select an image to process:", "fileSelected");
+  //}
+  state++;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,10 +134,10 @@ void draw() {
   
   switch(state) {
   case 1: 
-    //println("State=1, Waiting for filename selection");
+    println("State=1, Waiting for filename selection");
     break;
   case 2:
-    //println("State=2, Setup squiggles");
+    println("State=2, Setup squiggles");
     loop();
     setup_squiggles();
     startTime = millis();
@@ -202,7 +204,9 @@ void setup_squiggles() {
 
   d1.line_count = 0;
   //randomSeed(millis());
-  img = loadImage(path_selected, "jpeg");  // Load the image into the program  
+  //img = loadImage(path_selected, "jpeg");  // Load the image into the program  
+  img = loadImage(sketchPath("") + pic_path);
+  
   gcode_comment("loaded image: " + path_selected);
 
   image_rotate();
@@ -358,11 +362,11 @@ void keyPressed() {
     if (pen_count > 9) { pen_distribution[9] *= 0.55; }
 }
   if (key == 'g') { 
-    create_gcode_files(display_line_count);
-    create_gcode_test_file ();
+    //create_gcode_files(display_line_count);
+    //create_gcode_test_file ();
     create_svg_file(display_line_count);
-    d1.render_to_pdf(display_line_count);
-    d1.render_each_pen_to_pdf(display_line_count);
+    //d1.render_to_pdf(display_line_count);
+    //d1.render_each_pen_to_pdf(display_line_count);
   }
 
   if (key == '\\') { screen_scale = screen_scale_org; screen_rotate=0; mx=0; my=0; }
