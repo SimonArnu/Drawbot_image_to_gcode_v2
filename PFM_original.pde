@@ -5,13 +5,13 @@
 
 class PFM_original implements pfm {
 
-  final int    squiggle_length = 500;      // How often to lift the pen
+  final int    squiggle_length = 150;      // How often to lift the pen
   final int    adjustbrightness = 7;       // How fast it moves from dark to light, over-draw
-  final float  desired_brightness = 220;   // How long to process.  You can always stop early with "s" key
-  final int    squiggles_till_first_change = 300;
+  final float  desired_brightness = 245;   // How long to process.  You can always stop early with "s" key
+  final int    squiggles_till_first_change = 500;
 
   int          tests = 30;                 // Reasonable values:  13 for development, 720 for final
-  int          line_length = int(random(7, 13));  // Reasonable values:  3 through 100
+  int          line_length = int(random(30, 40));  // Reasonable values:  3 through 100
 
   int          squiggle_count;
   int          darkest_x;
@@ -25,10 +25,10 @@ class PFM_original implements pfm {
     image_scale(int(image_size_x / pen_width));
     //image_sharpen(img);
     //image_blurr(img);
-    image_unsharpen(img, 5);
+    //image_unsharpen(img, 5);
     //image_unsharpen(img, 4);
     //image_unsharpen(img, 3);
-    image_unsharpen(img, 2);
+    //image_unsharpen(img, 2);
     //image_unsharpen(img, 1);
     //image_motion_blur(img);
     //image_invert();
@@ -41,7 +41,7 @@ class PFM_original implements pfm {
     
     //image_blur(2);
     image_boarder("b1.png", 0, 0);
-    image_boarder("b11.png", 0, 0);
+    //image_boarder("b11.png", 0, 0);
     //image_desaturate();
   }
   
@@ -132,13 +132,13 @@ class PFM_original implements pfm {
     //start_angle = random(-95, -75) + cos(radians(start_y/15))*90;
     //start_angle = 36 + degrees( ( sin(radians(start_x/9+46)) + cos(radians(start_y/26+26)) ));
     //start_angle = 34 + degrees( ( sin(radians(start_x/9+46)) + cos(radians(start_y/-7+26)) ));
-    if (squiggle_count <220) { tests = 20; } else { tests = 2; }
+    //if (squiggle_count <220) { tests = 20; } else { tests = 2; }
     //start_angle = random(20, 1);       // Cuba 1
     //start_angle = random(-72, -52);    // Spitfire
-    start_angle = random(-120, -140);  // skier
+    //start_angle = random(-120, -140);  // skier
     //start_angle = random(-100, -140);  // skier
     //
-    //start_angle = random(-360, -1);    // gradiant magic
+    start_angle = random(-360, -1);    // gradiant magic
     //
     //start_angle = squiggle_count % 360; // random
     //start_angle += squiggle_count/4;
@@ -155,7 +155,7 @@ class PFM_original implements pfm {
       //start_angle = degrees(atan2(img.height/2.0 - start_y -470, img.width/2.0 - start_x+130) )-10+90;    // wierd spiral
       //start_angle = degrees(atan2(img.height/2.0 - start_y +145, img.width/2.0 - start_x+45) )-10+90;    //cuba car
       //start_angle = degrees(atan2(img.height/2.0 - start_y +210, img.width/2.0 - start_x-100) )-10;    // italy
-      //line_length = int(random(10, 60));
+      line_length = int(random(5, 10));
       delta_angle = 180 + 7 / (float)tests;
     }
     

@@ -16,18 +16,18 @@ import processing.pdf.*;
 
 
 // Constants 
-final float   paper_size_x = 32 * 25.4;
-final float   paper_size_y = 40 * 25.4;
-final float   image_size_x = 28 * 25.4;
-final float   image_size_y = 36 * 25.4;
+final float   paper_size_x = 290;
+final float   paper_size_y = 410;
+final float   image_size_x = 370;
+final float   image_size_y = 390;
 final float   paper_top_to_origin = 350;      //mm, make smaller to move drawing down on paper
-final float   pen_width = 0.65;               //mm, determines image_scale, reduce, if solid black areas are speckled with white holes.
+final float   pen_width = 0.4;               //mm, determines image_scale, reduce, if solid black areas are speckled with white holes.
 final int     pen_count = 1;
 final char    gcode_decimal_seperator = '.';    
 final int     gcode_decimals = 2;             // Number of digits right of the decimal point in the gcode files.
 final int     svg_decimals = 2;               // Number of digits right of the decimal point in the SVG file.
 final float   grid_scale = 25.4;              // Use 10.0 for centimeters, 25.4 for inches, and between 444 and 529.2 for cubits.
-final String  pic_path = "pics/DSC01117.png";
+final String  pic_path = "pics/Flauschiges_Kueken.png";
 
 // Every good program should have a shit pile of badly named globals.
 Class cl = null;
